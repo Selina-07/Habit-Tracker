@@ -4,6 +4,8 @@ A simple wellbeing tracker to help you stay mindful, build small habits, and fee
 
 ---
 
+## Live Server:  https://selina-07.github.io/Habit-Tracker/
+
 ## ✨ What it does
 
 - 💭 Shows a calming thought of the day

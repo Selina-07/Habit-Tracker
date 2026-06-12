@@ -1,0 +1,346 @@
+/* ===========================================================
+   MindfulDay — Digital Wellbeing Tracker
+   Mobile-first CSS using only Grid, Flexbox & clamp()
+   No frameworks — pure CSS3
+   =========================================================== */
+
+/* -----------------------------------------------------------
+   1. DESIGN TOKENS (2025 "Warm & Grounding" palette)
+   -----------------------------------------------------------
+   Mocha Mousse  -> stability / brand color
+   Ethereal Blue -> trust / calm accent
+   Moonlit Grey  -> refinement / background
+----------------------------------------------------------- */
+:root {
+  --mocha-mousse: #a47764; /* warm earthy brown */
+  --mocha-deep: #6f4e37; /* darker brown, used for text on light bg */
+  --ethereal-blue: #a9c6d8; /* soft, calm blue */
+  --ethereal-deep: #5b7c8d; /* deeper blue, used for secondary text */
+  --moonlit-grey: #f2f0ea; /* page background */
+  --white: #ffffff;
+  --text-dark: #3d332c;
+
+  /* Typography: 2 font families, 3 weights total */
+  --font-heading: "Montserrat", sans-serif; /* weight 700 */
+  --font-body: "Open Sans", sans-serif; /* weights 400 & 600 */
+
+  --gap: 1.5rem;
+}
+
+/* -----------------------------------------------------------
+   2. RESET — gives every browser the same starting point
+----------------------------------------------------------- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--moonlit-grey);
+  color: var(--text-dark);
+  line-height: 1.6;
+}
+
+/* -----------------------------------------------------------
+   3. ACCESSIBILITY HELPERS
+----------------------------------------------------------- */
+
+/* Hidden until a keyboard user tabs to it */
+.skip-link {
+  position: absolute;
+  left: -999px;
+  top: 0;
+  background-color: var(--mocha-deep);
+  color: var(--white);
+  padding: 0.5rem 1rem;
+  z-index: 100;
+}
+
+.skip-link:focus {
+  left: 0;
+}
+
+/* Clear focus outline for keyboard users (links, buttons, checkboxes) */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible {
+  outline: 3px solid var(--mocha-mousse);
+  outline-offset: 2px;
+}
+
+/* Respect users who prefer less motion */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* -----------------------------------------------------------
+   4. HEADER + NAVIGATION
+   (Flexbox is used here for the small nav component)
+----------------------------------------------------------- */
+.site-header {
+  background-color: var(--mocha-mousse);
+  color: var(--white);
+  padding: 1rem 1.25rem;
+
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.logo {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  /* clamp(min, preferred, max) -> font scales smoothly with screen size */
+  font-size: clamp(1.25rem, 4vw, 1.75rem);
+}
+
+.main-nav ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  list-style: none;
+}
+
+.main-nav a {
+  color: var(--white);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.main-nav a:hover,
+.main-nav a:focus {
+  text-decoration: underline;
+}
+
+/* -----------------------------------------------------------
+   5. MAIN LAYOUT (CSS Grid — the macro structure)
+   Mobile: everything stacks in a single column
+----------------------------------------------------------- */
+.layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--gap);
+  padding: 1.25rem;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+/* -----------------------------------------------------------
+   6. CARDS — shared style for every <article>
+----------------------------------------------------------- */
+.card {
+  background-color: var(--white);
+  border-radius: 16px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 12px rgba(111, 78, 55, 0.08);
+}
+
+.card h2 {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: clamp(1.2rem, 3vw, 1.5rem);
+  color: var(--mocha-deep);
+  margin-bottom: 0.75rem;
+}
+
+.card-subtitle {
+  color: var(--ethereal-deep);
+  font-size: 0.95rem;
+  margin-bottom: 1rem;
+}
+
+/* -----------------------------------------------------------
+   7. QUOTE CARD
+----------------------------------------------------------- */
+.quote-text {
+  font-size: clamp(1rem, 2.5vw, 1.2rem);
+  font-style: italic;
+  margin-bottom: 1.25rem;
+  min-height: 3em; /* keeps the card a steady height when the quote changes */
+}
+
+.btn {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 0.95rem;
+  background-color: var(--ethereal-blue);
+  color: var(--mocha-deep);
+  border: none;
+  border-radius: 999px;
+  padding: 0.65rem 1.4rem;
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.btn:hover,
+.btn:focus-visible {
+  background-color: var(--ethereal-deep);
+  color: var(--white);
+}
+
+/* -----------------------------------------------------------
+   8. HABIT LIST
+   (Flexbox is used for each habit row — a micro component)
+----------------------------------------------------------- */
+.habit-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.habit-item label {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--moonlit-grey);
+  border-radius: 12px;
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.habit-item label:hover {
+  border-color: var(--ethereal-blue);
+}
+
+.habit-checkbox {
+  width: 1.2rem;
+  height: 1.2rem;
+  accent-color: var(--mocha-mousse);
+  flex-shrink: 0;
+}
+
+/* Style applied by JavaScript once a habit is checked */
+.habit-item.completed label {
+  background-color: var(--moonlit-grey);
+  border-color: var(--ethereal-blue);
+}
+
+.habit-item.completed .habit-name {
+  text-decoration: line-through;
+  color: var(--ethereal-deep);
+}
+
+/* -----------------------------------------------------------
+   9. PROGRESS CIRCLE
+   --percent is a CSS variable updated live by JavaScript
+----------------------------------------------------------- */
+.progress-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.progress-circle {
+  --percent: 0; /* default value, JS will update this */
+
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+
+  /* conic-gradient draws a "pie" that fills based on --percent */
+  background: conic-gradient(
+    var(--ethereal-blue) calc(var(--percent) * 1%),
+    var(--moonlit-grey) 0
+  );
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0.5rem auto 1rem;
+  transition: background 0.4s ease;
+}
+
+.progress-circle-inner {
+  width: 108px;
+  height: 108px;
+  background-color: var(--white);
+  border-radius: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: clamp(1.3rem, 4vw, 1.6rem);
+  color: var(--mocha-deep);
+}
+
+.progress-message {
+  font-weight: 600;
+  color: var(--ethereal-deep);
+}
+
+/* -----------------------------------------------------------
+   10. FOOTER
+----------------------------------------------------------- */
+.site-footer {
+  background-color: var(--mocha-deep);
+  color: var(--moonlit-grey);
+  text-align: center;
+  padding: 1rem;
+  font-size: 0.9rem;
+  margin-top: 1rem;
+}
+
+/* ===========================================================
+   11. MEDIA QUERIES — Mobile-first scaling
+   Tablet: 768px and up
+   Desktop: 1024px and up
+=========================================================== */
+
+/* ---- TABLET (768px) ---- */
+@media (min-width: 768px) {
+  .site-header {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .layout {
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+      "quote   quote"
+      "habits  progress";
+  }
+
+  .quote-card {
+    grid-area: quote;
+  }
+  .habits-card {
+    grid-area: habits;
+  }
+  .progress-card {
+    grid-area: progress;
+  }
+}
+
+/* ---- DESKTOP (1024px) ---- */
+@media (min-width: 1024px) {
+  .layout {
+    grid-template-columns: 2fr 1fr;
+    gap: 2rem;
+    padding: 2rem;
+  }
+
+  .site-header {
+    padding: 1.25rem 2rem;
+  }
+}

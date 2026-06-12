@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MindfulDay — Digital Wellbeing Tracker</title>
+
+    <!-- Google Fonts: Montserrat for headings, Open Sans for body text -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Open+Sans:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- Skip link: lets keyboard / screen-reader users jump straight to the content -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <!-- ===== HEADER: branding + navigation ===== -->
+    <header class="site-header">
+      <p class="logo">MindfulDay</p>
+
+      <nav class="main-nav" aria-label="Main navigation">
+        <ul>
+          <li><a href="#quote">Today</a></li>
+          <li><a href="#habits">Habits</a></li>
+          <li><a href="#progress">Progress</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <!-- ===== MAIN: the core content of the app ===== -->
+    <main id="main-content" class="layout">
+      <!-- Article 1: Daily motivational quote -->
+      <article class="card quote-card" id="quote">
+        <h2>Today's Thought</h2>
+        <p class="quote-text" id="quote-text">
+          Loading your thought for today...
+        </p>
+        <button class="btn" id="new-quote-btn" type="button">
+          Show another thought
+        </button>
+      </article>
+
+      <!-- Article 2: Habit checklist -->
+      <article class="card habits-card" id="habits">
+        <h2>Today's Habits</h2>
+        <p class="card-subtitle">Tick off each habit as you complete it.</p>
+
+        <ul class="habit-list">
+          <li class="habit-item">
+            <label>
+              <input type="checkbox" class="habit-checkbox" />
+              <span class="habit-name">Drink a glass of water</span>
+            </label>
+          </li>
+          <li class="habit-item">
+            <label>
+              <input type="checkbox" class="habit-checkbox" />
+              <span class="habit-name">Take a 5-minute walk</span>
+            </label>
+          </li>
+          <li class="habit-item">
+            <label>
+              <input type="checkbox" class="habit-checkbox" />
+              <span class="habit-name"
+                >Write down one thing you're grateful for</span
+              >
+            </label>
+          </li>
+          <li class="habit-item">
+            <label>
+              <input type="checkbox" class="habit-checkbox" />
+              <span class="habit-name">Take a 10-minute screen break</span>
+            </label>
+          </li>
+          <li class="habit-item">
+            <label>
+              <input type="checkbox" class="habit-checkbox" />
+              <span class="habit-name">Take 5 slow, deep breaths</span>
+            </label>
+          </li>
+        </ul>
+      </article>
+
+      <!-- Article 3: Progress circle -->
+      <article class="card progress-card" id="progress">
+        <h2>Your Progress</h2>
+
+        <div class="progress-circle" id="progress-circle">
+          <div class="progress-circle-inner">
+            <span id="progress-percent">0%</span>
+          </div>
+        </div>
+
+        <p class="progress-message" id="progress-message">Let's get started!</p>
+      </article>
+    </main>
+
+    <!-- ===== FOOTER: metadata ===== -->
+    <footer class="site-footer">
+      <p>MindfulDay &mdash; Built with pure HTML, CSS &amp; JavaScript</p>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
